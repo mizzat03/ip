@@ -1,21 +1,32 @@
 import java.util.Scanner;
 
+
 public class Lenny {
     public static void main(String[] args) {
         Scanner myObj = new Scanner(System.in); //read input
+        listOfTasks list = new listOfTasks(); //listOfTasks object to store the array of String tasks
 
-        String terminatingLine = "Bye. Hope to see you again soon!";
         String terminatingCondition = "bye";
+        String terminatingLine = "Bye. Hope to see you again soon!";
 
-        String firstline = "Hello! I'm Lenny!";
+
+        String conditionOne = "list";
+
+        String introline = "Hello! I'm Lenny!";
         String secondline = "What can I do for you?";
 
-        System.out.println(firstline + "\n" + secondline);
 
-        String input = myObj.nextLine();
+
+        System.out.println(introline + "\n" + secondline);
+
+        String input = myObj.nextLine(); //asking for input
 
         while (!input.equals(terminatingCondition)) {
-            System.out.println(input);
+            if (input.equals(conditionOne)) {
+                list.display();
+            } else {
+                list.addTask(input);
+            }
             input = myObj.nextLine();
         }
 
