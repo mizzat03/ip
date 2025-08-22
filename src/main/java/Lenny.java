@@ -70,6 +70,9 @@ public class Lenny {
                     list.addTask(eventTask);
                     break;
 
+                case "delete":
+                    list.deleteTask(Integer.parseInt(parts[1]));
+                    break;
 
                 default:
                     throw new LennyExceptions("OOPS!!! I'm sorry, but I don't know what that means :-(");
