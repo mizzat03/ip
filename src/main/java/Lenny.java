@@ -1,8 +1,9 @@
 import java.util.Scanner;
 
 
+
 public class Lenny {
-    public static void main(String[] args) {
+    public static void main (String[] args) throws LennyExceptions {
         Scanner myObj = new Scanner(System.in); //read input
         listOfTasks list = new listOfTasks(); //listOfTasks object to store the array of String tasks
 
@@ -10,16 +11,9 @@ public class Lenny {
         String terminatingLine = "Bye. Hope to see you again soon!";
 
 
-        String conditionOne = "list";
-        String conditionTwo = "mark";
-        String conditionThree = "unmark";
-        String conditionFour = "todo";
-        String conditionFive = "deadline";
-        String conditionSix = "event";
 
         String introline = "Hello! I'm Lenny!";
         String secondline = "What can I do for you?";
-
 
 
         System.out.println(introline + "\n" + secondline);
@@ -27,52 +21,62 @@ public class Lenny {
         String input = myObj.nextLine(); //asking for input
 
         while (!input.equals(terminatingCondition)) {
-            if (input.startsWith(conditionOne)) {
-                list.display();
+            String[] parts = input.split(" ", 2);
+            String command = parts[0];
+            switch (command) {
+                case "list":
+                    list.display();
+                    break;
 
-            } else if (input.startsWith(conditionTwo)) {
-                String[] parts = input.split(" ");
-                int i = Integer.parseInt(parts[1]);
-                list.markTask(i);
+                case "mark":
+                    int i = Integer.parseInt(parts[1]);
+                    list.markTask(i);
+                    break;
+
+                case "unmark":
+                    int j = Integer.parseInt(parts[1]);
+                    list.unmarkTask(j);
+                    break;
+
+                case "todo":
+                    if (parts.length < 2 || parts[1].trim().isEmpty()) {
+                        throw new LennyExceptions("OOPS!!! The description of a todo cannot be empty.");
+                    }
+                    Todo todoTask = new Todo(parts[1]);
+                    list.addTask(todoTask);
+                    break;
+
+                case "deadline":
+                    if (parts.length < 2 || !parts[1].contains("/by")) {
+                        throw new LennyExceptions("OOPS!!! The description of a deadline must include /by.");
+                    }
+
+                    String[] split = parts[1].split("/", 2);
+                    String deadlineName = split[0].trim();
+                    String deadline = split[1].trim();
+                    Deadline deadlineTask = new Deadline(deadlineName, deadline);
+                    list.addTask(deadlineTask);
+                    break;
+
+                case "event":
+                    if (parts.length < 2 || !parts[1].contains("/from") || !parts[1].contains("/to")) {
+                        throw new LennyExceptions("OOPS!!! The description of an event must include /from and /to.");
+                    }
+                    String[] eventSplit = parts[1].split("/", 2);
+
+                    String eventName = eventSplit[0].trim();
+                    String duration = eventSplit[1].trim();
+                    Event eventTask = new Event(eventName, duration);
+                    list.addTask(eventTask);
+                    break;
 
 
-            } else if (input.startsWith(conditionThree)) {
-                String[] parts = input.split(" ");
-                int i = Integer.parseInt(parts[1]);
-                list.unmarkTask(i);
-
-            } else if (input.startsWith(conditionFour)) {
-                String[] parts = input.split(" ",2);
-                Todo tobeAdded = new Todo(parts[1]);
-                list.addTask(tobeAdded);
-
-            } else if (input.startsWith(conditionFive)) {
-                String[] firstSplit = input.split(" ", 2);
-
-                String[] parts = firstSplit[1].split("/", 2);
-
-                String task = parts[0].trim();
-                String deadline = parts[1].trim();
-                Deadline tobeAdded = new Deadline(task,deadline);
-                list.addTask(tobeAdded);
-
-            } else if (input.startsWith(conditionSix)) {
-                String[] firstSplit = input.split(" ", 2);
-
-                String[] parts = firstSplit[1].split("/", 2);
-
-                String task = parts[0].trim();
-                String duration = parts[1].trim();
-                Event tobeAdded = new Event(task,duration);
-                list.addTask(tobeAdded);
+                default:
+                    throw new LennyExceptions("OOPS!!! I'm sorry, but I don't know what that means :-(");
 
             }
-
-
             input = myObj.nextLine();
         }
-
         System.out.println(terminatingLine);
     }
-
 }
