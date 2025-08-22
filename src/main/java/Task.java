@@ -11,11 +11,11 @@ public class Task {
         return taskName;
     }
 
-    public void markAsDone() {
+    public void mark() {
         isDone = true;
     }
 
-    public void unmarkAsDone() {
+    public void unmark() {
         isDone = false;
     }
 }
