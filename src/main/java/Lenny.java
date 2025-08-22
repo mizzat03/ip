@@ -11,6 +11,8 @@ public class Lenny {
 
 
         String conditionOne = "list";
+        String conditionTwo = "mark";
+        String conditionThree = "unmark";
 
         String introline = "Hello! I'm Lenny!";
         String secondline = "What can I do for you?";
@@ -22,8 +24,19 @@ public class Lenny {
         String input = myObj.nextLine(); //asking for input
 
         while (!input.equals(terminatingCondition)) {
-            if (input.equals(conditionOne)) {
+            if (input.startsWith(conditionOne)) {
                 list.display();
+            } else if (input.startsWith(conditionTwo)) {
+                String[] parts = input.split(" ");
+                int i = Integer.parseInt(parts[1]);
+                list.markTask(i);
+
+
+            } else if (input.startsWith(conditionThree)) {
+                String[] parts = input.split(" ");
+                int i = Integer.parseInt(parts[1]);
+                list.unmarkTask(i);
+
             } else {
                 list.addTask(input);
             }
