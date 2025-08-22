@@ -34,7 +34,7 @@ public class listOfTasks {
     }
 
     public void display() {
-        System.out.println( "Here are the tasks in your list:\n");
+        System.out.println( "Here are the tasks in your list:");
         for (int i = 0; i < listSize; i++) {
             System.out.println((i + 1) + ". " + list[i].toString());
 
