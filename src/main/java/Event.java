@@ -1,9 +1,15 @@
 public class Event extends Task {
     String duration;
 
-    public Event(String taskName, String duration) {
+    public Event(String taskName, String duration, Boolean isDone) {
         super(taskName);
+        taskType = "E";
         this.duration = duration;
+        this.isDone = isDone;
+    }
+
+    public String getDuration() {
+        return duration;
     }
 
     @Override

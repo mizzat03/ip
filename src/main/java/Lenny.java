@@ -1,11 +1,35 @@
+import java.io.File;
 import java.util.Scanner;
+import java.nio.file.*;
+import java.io.IOException;
 
 
 
 public class Lenny {
     public static void main (String[] args) throws LennyExceptions {
-        Scanner myObj = new Scanner(System.in); //read input
-        listOfTasks list = new listOfTasks(); //listOfTasks object to store the array of String tasks
+
+        Path dir  = Paths.get("data");
+        Path file = dir.resolve("LennyData.txt");
+
+        try {
+            Files.createDirectories(dir);           // idempotent if dir already exists
+            try {
+                Files.createFile(file);
+                System.out.println("Created the data file!");
+            } catch (FileAlreadyExistsException e) {
+                // File already exists — that's okay
+                System.out.println("Data file already exists!" );
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Problem preparing data storage", e);
+        }
+
+        File data = file.toFile();
+        listOfTasks list = listOfTasks.parseFile(data); //reads in data file regardless if it is empty or not to create a new listOfTasks object
+
+
+        Scanner myObj = new Scanner(System.in); //read keyboard input
+
 
         String terminatingCondition = "bye";
         String terminatingLine = "Bye. Hope to see you again soon!";
@@ -42,8 +66,8 @@ public class Lenny {
                     if (parts.length < 2 || parts[1].trim().isEmpty()) {
                         throw new LennyExceptions("OOPS!!! The description of a todo cannot be empty.");
                     }
-                    Todo todoTask = new Todo(parts[1]);
-                    list.addTask(todoTask);
+                    Todo todoTask = new Todo(parts[1],false);
+                    list.addTask(todoTask,data);
                     break;
 
                 case "deadline":
@@ -54,8 +78,8 @@ public class Lenny {
                     String[] split = parts[1].split("/", 2);
                     String deadlineName = split[0].trim();
                     String deadline = split[1].trim();
-                    Deadline deadlineTask = new Deadline(deadlineName, deadline);
-                    list.addTask(deadlineTask);
+                    Deadline deadlineTask = new Deadline(deadlineName, deadline,false);
+                    list.addTask(deadlineTask,data);
                     break;
 
                 case "event":
@@ -66,8 +90,8 @@ public class Lenny {
 
                     String eventName = eventSplit[0].trim();
                     String duration = eventSplit[1].trim();
-                    Event eventTask = new Event(eventName, duration);
-                    list.addTask(eventTask);
+                    Event eventTask = new Event(eventName, duration,false);
+                    list.addTask(eventTask,data);
                     break;
 
                 case "delete":
@@ -80,6 +104,8 @@ public class Lenny {
             }
             input = myObj.nextLine();
         }
+
         System.out.println(terminatingLine);
+        listOfTasks.writeToFile(data, list);
     }
 }
