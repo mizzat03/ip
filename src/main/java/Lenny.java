@@ -99,6 +99,7 @@ public class Lenny {
                     break;
 
                 default:
+                    listOfTasks.writeToFile(data, list);
                     throw new LennyExceptions("OOPS!!! I'm sorry, but I don't know what that means :-(");
 
             }

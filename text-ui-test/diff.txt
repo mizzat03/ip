@@ -1,21 +1,3 @@
 Comparing files ACTUAL.TXT and EXPECTED.TXT
-***** ACTUAL.TXT
-    1:  Hello! I'm Lenny!
-    2:  What can I do for you?
-    3:  Got it. I've added this task:
-***** EXPECTED.TXT
-    1:  Hello! I'm Lenny!
-    2:  What can I dooo for you?
-    3:  Got it. I've added this task:
-*****
-
-***** ACTUAL.TXT
-    9:  Got it. I've added this task:
-   10:    [D][ ] project meeting (from: Mon 2pm to: 4pm)
-   11:  Now you have 3 tasks in the list.
-***** EXPECTED.TXT
-    9:  Got it. I've added this task:
-   10:    [D][ ] projjject meeting (from: Mon 2pm to: 4pm)
-   11:  Now you have 3 tasks in the list.
-*****
+FC: no differences encountered
 
