@@ -8,9 +8,13 @@ public class Task {
         isDone = false;
     }
 
-    public String getTaskType(){ return taskType; }
+    public String getTaskType() {
+        return taskType;
+    }
 
-    public Boolean getIsDone(){ return isDone; }
+    public Boolean getIsDone() {
+        return isDone;
+    }
 
     public String getTaskName() {
         return taskName;

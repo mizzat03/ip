@@ -1,23 +1,22 @@
 public class Event extends Task {
-    String duration;
+    String from;
+    String to;
 
-    public Event(String taskName, String duration, Boolean isDone) {
+    public Event(String taskName, String fromRaw, String toRaw , Boolean isDone) {
         super(taskName);
         taskType = "E";
-        this.duration = duration;
+        this.from = DateFormatter.format(fromRaw);
+        this.to   = DateFormatter.format(toRaw);
         this.isDone = isDone;
     }
 
     public String getDuration() {
-        return duration;
+        return from + " - " + to;
     }
 
     @Override
     public String toString() {
-        String[] split = duration.split("/", 2);
-        String start = split[0].replaceFirst("from", "").trim();
-        String end   = split[1].replaceFirst("to", "").trim();
-        return "[D]" + (this.isDone ? "[X] " : "[ ] ") + this.getTaskName() + " (from: " + start + " to: " + end + ")" ;
+        return "[E]" + (isDone ? "[X] " : "[ ] ") + getTaskName() + " (from: " + from + " to: " + to + ")";
     }
 
 }

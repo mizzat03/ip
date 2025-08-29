@@ -1,6 +1,9 @@
 import java.io.File;
 import java.util.Scanner;
-import java.nio.file.*;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.io.IOException;
 
 
@@ -67,7 +70,7 @@ public class Lenny {
                         throw new LennyExceptions("OOPS!!! The description of a todo cannot be empty.");
                     }
                     Todo todoTask = new Todo(parts[1],false);
-                    list.addTask(todoTask,data);
+                    list.addTask(todoTask);
                     break;
 
                 case "deadline":
@@ -75,23 +78,34 @@ public class Lenny {
                         throw new LennyExceptions("OOPS!!! The description of a deadline must include /by.");
                     }
 
-                    String[] split = parts[1].split("/", 2);
-                    String deadlineName = split[0].trim();
-                    String deadline = split[1].trim();
-                    Deadline deadlineTask = new Deadline(deadlineName, deadline,false);
-                    list.addTask(deadlineTask,data);
+                    String rhs = parts[1]; // e.g. "return book /by 2/12/2019 1800"
+                    int byIdx = rhs.indexOf("/by");
+                    if (byIdx < 0 || byIdx + 3 >= rhs.length()) {
+                        throw new LennyExceptions("OOPS!!! Provide a date/time after /by.");
+                    }
+
+                    String deadlineTaskName = rhs.substring(0, byIdx).trim();      // "return book"
+                    String rawDeadline = rhs.substring(byIdx + 3).trim();      // "2/12/2019 1800"
+
+                    Deadline deadlineTask = new Deadline(deadlineTaskName, rawDeadline, false);
+                    list.addTask(deadlineTask);
                     break;
 
                 case "event":
                     if (parts.length < 2 || !parts[1].contains("/from") || !parts[1].contains("/to")) {
                         throw new LennyExceptions("OOPS!!! The description of an event must include /from and /to.");
                     }
-                    String[] eventSplit = parts[1].split("/", 2);
+                    String rhsEvent = parts[1]; // "project meeting /from 2/12/2019 1800 /to 2/12/2019 2000"
 
-                    String eventName = eventSplit[0].trim();
-                    String duration = eventSplit[1].trim();
-                    Event eventTask = new Event(eventName, duration,false);
-                    list.addTask(eventTask,data);
+                    int fromIdx = rhsEvent.indexOf("/from");
+                    int toIdx   = rhsEvent.indexOf("/to");
+
+                    String eventName = rhsEvent.substring(0, fromIdx).trim();              // "project meeting"
+                    String fromRaw   = rhsEvent.substring(fromIdx + 5, toIdx).trim();      // "2/12/2019 1800"
+                    String toRaw     = rhsEvent.substring(toIdx + 3).trim();               // "2/12/2019 2000"
+
+                    Event eventTask = new Event(eventName, fromRaw, toRaw, false);
+                    list.addTask(eventTask);
                     break;
 
                 case "delete":
