@@ -1,1 +1,2 @@
-T | 1 | hi
+D | 1 | return book | by 2/12/2019 1800
+D | 0 | return book | by 2/12/2019 2000

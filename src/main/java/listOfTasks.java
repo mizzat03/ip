@@ -5,7 +5,9 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 
 public class listOfTasks {
     ArrayList<Task> list;
@@ -18,7 +20,7 @@ public class listOfTasks {
         return list;
     }
 
-    public void addTask(Task task,File data) {
+    public void addTask(Task task) {
         list.add(task);
 
 
@@ -88,20 +90,21 @@ public class listOfTasks {
 
                 switch (type) {
                     case "T":
-                        tasks.addTask(new Todo(desc, doneFlag),data);
+                        tasks.addTask(new Todo(desc, doneFlag));
                         break;
 
                     case "D":
                         if (parts.length >= 4) {
                             String by = parts[3];
-                            tasks.addTask(new Deadline(desc, by, doneFlag),data);
+                            tasks.addTask(new Deadline(desc, by, doneFlag));
                         }
                         break;
 
                     case "E":
-                        if (parts.length >= 4) {
-                            String at = parts[3];
-                            tasks.addTask(new Event(desc, at, doneFlag),data);
+                        if (parts.length >= 5) {
+                            String from = parts[3];
+                            String to   = parts[4];
+                            tasks.addTask(new Event(desc, from, to, doneFlag));
                         }
                         break;
 

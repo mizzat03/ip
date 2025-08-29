@@ -1,11 +1,13 @@
+
 public class Deadline extends Task {
     String deadline;
 
 
-    public Deadline(String taskName, String deadline, Boolean isDone) {
+
+    public Deadline(String taskName, String rawDeadline, Boolean isDone) {
         super(taskName);
-        taskType = "D";
-        this.deadline = deadline;
+        this.taskType = "D";
+        this.deadline = DateFormatter.format(rawDeadline);
         this.isDone = isDone;
     }
 
@@ -15,9 +17,8 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        String[] split = deadline.split(" ", 2);
-        String day = split[1].trim();
-        return "[D]" + (this.isDone ? "[X] " : "[ ] ") + this.getTaskName() + " (by: " + day + ")";
+        return "[D]" + (this.isDone ? "[X] " : "[ ] ") + this.getTaskName() + " (by: " + this.deadline + ")";
     }
-
 }
+
+
