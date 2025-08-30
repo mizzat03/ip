@@ -33,7 +33,7 @@ application {
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveFileName = "lenny.jar"
     archiveClassifier = null
 }
 
