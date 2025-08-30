@@ -1,23 +1,21 @@
 package lenny.exception;
 
+/**
+ * Represents an exception specific to the Lenny application.
+ */
 public class LennyExceptions extends Exception {
     // Default constructor
     public LennyExceptions() {
         super();
     }
 
-    // Constructor that accepts a message
+    /**
+     * Creates a new LennyException with the given message.
+     *
+     * @param message Error message.
+     */
     public LennyExceptions(String message) {
         super(message);
     }
 
-    // Constructor that accepts a message and a cause
-    public LennyExceptions(String message, Throwable cause) {
-        super(message, cause);
-    }
-
-    // Constructor that accepts a cause
-    public LennyExceptions(Throwable cause) {
-        super(cause);
-    }
 }
