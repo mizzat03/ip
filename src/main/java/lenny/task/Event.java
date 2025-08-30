@@ -1,3 +1,7 @@
+package lenny.task;
+
+import lenny.util.DateFormatter;
+
 public class Event extends Task {
     String from;
     String to;

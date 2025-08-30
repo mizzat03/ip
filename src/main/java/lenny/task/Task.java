@@ -1,3 +1,5 @@
+package lenny.task;
+
 public class Task {
     String taskName;
     Boolean isDone;

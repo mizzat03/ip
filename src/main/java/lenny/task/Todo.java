@@ -1,3 +1,6 @@
+package lenny.task;
+
+
 public class Todo extends Task {
     public Todo(String taskName, Boolean isDone){
         super(taskName);

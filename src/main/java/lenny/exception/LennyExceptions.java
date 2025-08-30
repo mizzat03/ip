@@ -1,3 +1,5 @@
+package lenny.exception;
+
 public class LennyExceptions extends Exception {
     // Default constructor
     public LennyExceptions() {
