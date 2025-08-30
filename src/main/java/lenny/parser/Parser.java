@@ -97,4 +97,13 @@ public class Parser {
         String to = rhs.substring(toIdx + 3).trim();
         return new Event(name, from, to, false);
     }
+
+    public static String parseKeyword(String input) throws LennyExceptions {
+        String[] parts = input.trim().split("\\s+", 2);
+        if (parts.length < 2) {
+            throw new LennyExceptions("OOPS!!! Provide a keyword.");
+        }
+        return parts[1];
+
+    }
 }
