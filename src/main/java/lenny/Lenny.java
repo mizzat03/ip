@@ -71,6 +71,11 @@ public class Lenny {
                         isExit = true;
                         break;
 
+                    case "find":
+                        tasks.find(Parser.parseKeyword(input));
+                        break;
+
+
                     default:
                         throw new LennyExceptions("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }

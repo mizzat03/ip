@@ -10,7 +10,7 @@ public class TaskList {
         this.list = new ArrayList<>();
     }
 
-    public TaskList(List<Task> initial) {
+    public TaskList(ArrayList<Task> initial) {
         this.list = new ArrayList<>(initial);
     }
 
@@ -58,6 +58,15 @@ public class TaskList {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < list.size(); i++) {
             System.out.println((i + 1) + ". " + list.get(i));
+        }
+    }
+
+    public void find(String keyword) {
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).taskName.toLowerCase().contains(keyword.toLowerCase())) {
+                System.out.println((i + 1) + ". " + list.get(i));
+            }
         }
     }
 }
