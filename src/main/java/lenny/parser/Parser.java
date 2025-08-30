@@ -1,3 +1,10 @@
+package lenny.parser;
+
+import lenny.task.Deadline;
+import lenny.task.Event;
+import lenny.task.Todo;
+import lenny.exception.LennyExceptions;
+
 public class Parser {
 
     public static String command(String input) {

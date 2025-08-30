@@ -1,3 +1,7 @@
+package lenny.task;
+
+import lenny.util.DateFormatter;
+
 public class Deadline extends Task {
     String deadline;
 

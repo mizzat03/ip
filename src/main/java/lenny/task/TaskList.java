@@ -1,14 +1,16 @@
+package lenny.task;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class listOfTasks {
+public class TaskList {
     private final ArrayList<Task> list;
 
-    public listOfTasks() {
+    public TaskList() {
         this.list = new ArrayList<>();
     }
 
-    public listOfTasks(List<Task> initial) {
+    public TaskList(List<Task> initial) {
         this.list = new ArrayList<>(initial);
     }
 

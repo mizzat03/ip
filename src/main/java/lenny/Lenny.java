@@ -1,8 +1,14 @@
-import java.nio.file.Path;
+package lenny;
+
+import lenny.exception.LennyExceptions;
+import lenny.parser.Parser;
+import lenny.storage.Storage;
+import lenny.task.TaskList;
+import lenny.ui.Ui;
 
 public class Lenny {
     private final Storage storage;
-    private listOfTasks tasks;
+    private TaskList tasks;
     private final Ui ui;
 
     public Lenny(String filePath) {
@@ -10,10 +16,10 @@ public class Lenny {
         storage = new Storage(filePath);
         try {
             storage.ensureFile();
-            tasks = new listOfTasks(storage.load());
+            tasks = new TaskList(storage.load());
         } catch (RuntimeException e) {
             ui.showLoadingError();
-            tasks = new listOfTasks();
+            tasks = new TaskList();
         }
     }
 

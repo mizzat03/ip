@@ -1,3 +1,11 @@
+package lenny.storage;
+
+import lenny.task.Todo;
+import lenny.task.Deadline;
+import lenny.task.Event;
+import lenny.task.Task;
+import lenny.task.TaskList;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -82,7 +90,7 @@ public class Storage {
         return tasks;
     }
 
-    public void save(listOfTasks tasks) {
+    public void save(TaskList tasks) {
         try (BufferedWriter writer = Files.newBufferedWriter(
                 file,
                 StandardCharsets.UTF_8)) {
