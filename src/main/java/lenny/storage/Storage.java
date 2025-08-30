@@ -76,7 +76,7 @@ public class Storage {
                     case "E":
                         if (parts.length >= 5) {
                             String from = parts[3];
-                            String to   = parts[4];
+                            String to = parts[4];
                             tasks.add(new Event(desc, from, to, done));
                         }
                         break;
