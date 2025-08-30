@@ -72,6 +72,12 @@ public class TaskList {
         System.out.println("Now you have " + list.size() + " tasks in the list.");
     }
 
+    /**
+     * Marks the task at the given index (1-based).
+     *
+     * @param oneBasedIndex Index of the task to remove (1-based).
+     *
+     */
     public void mark(int oneBasedIndex) {
         Task t = list.get(oneBasedIndex - 1);
         t.mark();
@@ -79,6 +85,12 @@ public class TaskList {
         System.out.println("  " + t);
     }
 
+    /**
+     * Unmarks the task at the given index (1-based).
+     *
+     * @param oneBasedIndex Index of the task to remove (1-based).
+     *
+     */
     public void unmark(int oneBasedIndex) {
         Task t = list.get(oneBasedIndex - 1);
         t.unmark();
@@ -86,6 +98,10 @@ public class TaskList {
         System.out.println("  " + t);
     }
 
+    /**
+     * Prints the current tasks in the list.
+     *
+     */
     public void show() {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < list.size(); i++) {

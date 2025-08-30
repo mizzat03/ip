@@ -17,13 +17,24 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 
+/**
+ * Handles reading and writing tasks to storage.
+ */
 public class Storage {
     private final Path file;
 
+    /**
+     * Creates a Storage object with the given file path.
+     *
+     * @param filePath String representation of the path to the data file.
+     */
     public Storage(String filePath) {
         this.file = Path.of(filePath);
     }
 
+    /**
+     * Ensures that the data file and its directories exist.
+     */
     public void ensureFile() {
         try {
             Path dir = file.getParent();
@@ -41,6 +52,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads tasks from the data file into a TaskList.
+     *
+     * @return A ArrayList containing tasks read from storage.
+     */
     public ArrayList<Task> load() {
         ArrayList<Task> tasks = new ArrayList<>();
         File data = file.toFile();
@@ -90,6 +106,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves the given TaskList to the data file.
+     *
+     * @param tasks TaskList to save.
+     */
     public void save(TaskList tasks) {
         try (BufferedWriter writer = Files.newBufferedWriter(
                 file,
@@ -103,6 +124,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Formats the given task to the correct format to be saved in data file.
+     *
+     * @param t Task to be formatted before being saved in the data file.
+     */
     private static String formatTaskLine(Task t) {
         String type = t.getTaskType();
         String done = t.getIsDone() ? "1" : "0";

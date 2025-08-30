@@ -6,10 +6,18 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
 import java.util.Locale;
 
+/**
+ * Utility class for parsing and formatting date/time values
+ */
 public class DateFormatter {
     private DateFormatter() {}
 
-    // Turn any inputted date,timing into my desired format
+    /**
+     * Formats date and time given by the user into a standard format
+     *
+     * @param input User given date and time.
+     * @return A string representation of the date and time.
+     */
     public static String format(String input) {
         String s = input.trim();
 
@@ -53,7 +61,12 @@ public class DateFormatter {
         return s;
     }
 
-    // Helper
+    /**
+     * A helper function to produce an ordinal date and time given any DateTime object.
+     *
+     * @param dt A LocalDateTime object.
+     * @return A string representation of the ordinal date and time.
+     */
     private static String toOrdinalDateTime(LocalDateTime dt) {
         int day = dt.getDayOfMonth();
         String dayWithOrd = day + ordinal(day);
@@ -69,7 +82,12 @@ public class DateFormatter {
         return String.format("%s of %s %d, %s", dayWithOrd, month, year, time);
     }
 
-    // helper suffix
+    /**
+     * Given an integer,produces a ordinal for it.
+     *
+     * @param d An integer
+     * @return A string representation of the ordinal of a integer.
+     */
     private static String ordinal(int d) {
         int v = d % 100;
         if (v >= 11 && v <= 13) return "th";
