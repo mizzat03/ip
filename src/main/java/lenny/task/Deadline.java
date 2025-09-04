@@ -7,7 +7,7 @@ import lenny.util.DateFormatter;
  * A Deadline task has a description and a specific due date/time.
  */
 public class Deadline extends Task {
-    String deadline;
+    private String deadline;
 
     /**
      * Creates a new Deadline task.

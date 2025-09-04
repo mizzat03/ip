@@ -7,8 +7,8 @@ import lenny.util.DateFormatter;
  * Represents an event task that has a start and end time.
  */
 public class Event extends Task {
-    String from;
-    String to;
+    private String from;
+    private String to;
 
     /**
      * Creates a new Event task.
@@ -22,7 +22,7 @@ public class Event extends Task {
         super(taskName);
         taskType = "E";
         this.from = DateFormatter.format(fromRaw);
-        this.to   = DateFormatter.format(toRaw);
+        this.to = DateFormatter.format(toRaw);
         this.isDone = isDone;
     }
 
