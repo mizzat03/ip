@@ -1,9 +1,10 @@
 package lenny.parser;
 
+import lenny.exception.LennyExceptions;
 import lenny.task.Deadline;
 import lenny.task.Event;
 import lenny.task.Todo;
-import lenny.exception.LennyExceptions;
+
 
 /**
  * Parses user input commands into Task objects or program actions.
@@ -98,12 +99,18 @@ public class Parser {
         return new Event(name, from, to, false);
     }
 
+    /**
+     * Parses a find command for the keyword.
+     *
+     * @param input Full user input string containing the keyword.
+     * @return A keyword.
+     * @throws LennyExceptions If keyword is missing.
+     */
     public static String parseKeyword(String input) throws LennyExceptions {
         String[] parts = input.trim().split("\\s+", 2);
         if (parts.length < 2) {
             throw new LennyExceptions("OOPS!!! Provide a keyword.");
         }
         return parts[1];
-
     }
 }

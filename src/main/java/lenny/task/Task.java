@@ -15,7 +15,7 @@ public class Task {
      *
      * @param taskName The name of the task.
      */
-    public Task(String taskName){
+    public Task(String taskName) {
         this.taskName = taskName;
         isDone = false;
     }

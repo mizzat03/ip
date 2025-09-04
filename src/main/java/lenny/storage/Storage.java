@@ -1,10 +1,12 @@
 package lenny.storage;
 
-import lenny.task.Todo;
+
 import lenny.task.Deadline;
 import lenny.task.Event;
 import lenny.task.Task;
 import lenny.task.TaskList;
+import lenny.task.Todo;
+
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -65,10 +67,14 @@ public class Storage {
             String line;
             while ((line = br.readLine()) != null) {
                 String t = line.trim();
-                if (t.isEmpty() || t.startsWith("#")) continue;
+                if (t.isEmpty() || t.startsWith("#")) {
+                    continue;
+                }
 
                 String[] parts = t.split("\\s*\\|\\s*", -1);
-                if (parts.length < 3) continue;
+                if (parts.length < 3) {
+                    continue;
+                }
 
                 String type = parts[0];
                 boolean done;
@@ -79,25 +85,26 @@ public class Storage {
                 }
                 String desc = parts[2];
 
+
                 switch (type) {
-                    case "T":
-                        tasks.add(new Todo(desc, done));
-                        break;
-                    case "D":
-                        if (parts.length >= 4) {
-                            String by = parts[3];
-                            tasks.add(new Deadline(desc, by, done));
-                        }
-                        break;
-                    case "E":
-                        if (parts.length >= 5) {
-                            String from = parts[3];
-                            String to = parts[4];
-                            tasks.add(new Event(desc, from, to, done));
-                        }
-                        break;
-                    default:
-                        // ignore unknown lines
+                case "T":
+                    tasks.add(new Todo(desc, done));
+                    break;
+                case "D":
+                    if (parts.length >= 4) {
+                        String by = parts[3];
+                        tasks.add(new Deadline(desc, by, done));
+                    }
+                    break;
+                case "E":
+                    if (parts.length >= 5) {
+                        String from = parts[3];
+                        String to = parts[4];
+                        tasks.add(new Event(desc, from, to, done));
+                    }
+                    break;
+                default:
+                    // ignore unknown lines
                 }
             }
         } catch (IOException e) {
@@ -135,16 +142,16 @@ public class Storage {
         String desc = t.getTaskName();
 
         switch (type) {
-            case "T":
-                return String.format("%s | %s | %s", type, done, desc);
-            case "D":
-                String by = ((Deadline) t).getDeadline();
-                return String.format("%s | %s | %s | %s", type, done, desc, by);
-            case "E":
-                String duration = ((Event) t).getDuration();
-                return String.format("%s | %s | %s | %s", type, done, desc, duration);
-            default:
-                return "# Unknown task: " + type;
+        case "T":
+            return String.format("%s | %s | %s", type, done, desc);
+        case "D":
+            String by = ((Deadline) t).getDeadline();
+            return String.format("%s | %s | %s | %s", type, done, desc, by);
+        case "E":
+            String duration = ((Event) t).getDuration();
+            return String.format("%s | %s | %s | %s", type, done, desc, duration);
+        default:
+            return "# Unknown task: " + type;
         }
     }
 }

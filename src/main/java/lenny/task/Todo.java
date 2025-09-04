@@ -11,7 +11,7 @@ public class Todo extends Task {
      * @param taskName Description of the todo task.
      * @param isDone True if the todo is already completed, otherwise false.
      */
-    public Todo(String taskName, Boolean isDone){
+    public Todo(String taskName, Boolean isDone) {
         super(taskName);
         taskType = "T";
         this.isDone = isDone;

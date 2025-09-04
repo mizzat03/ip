@@ -109,6 +109,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Prints the current tasks in the list.
+     * @param keyword The word we are searching for.
+     */
     public void find(String keyword) {
         System.out.println("Here are the matching tasks in your list:");
         for (int i = 0; i < list.size(); i++) {

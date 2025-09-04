@@ -90,12 +90,14 @@ public class DateFormatter {
      */
     private static String ordinal(int d) {
         int v = d % 100;
-        if (v >= 11 && v <= 13) return "th";
+        if (v >= 11 && v <= 13) {
+            return "th";
+        }
         switch (d % 10) {
-            case 1: return "st";
-            case 2: return "nd";
-            case 3: return "rd";
-            default: return "th";
+        case 1: return "st";
+        case 2: return "nd";
+        case 3: return "rd";
+        default: return "th";
         }
     }
 }
