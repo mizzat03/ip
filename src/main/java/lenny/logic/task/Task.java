@@ -1,4 +1,4 @@
-package lenny.task;
+package lenny.logic.task;
 
 /**
  * Represents a generic task with a description and completion status.
@@ -6,9 +6,9 @@ package lenny.task;
  */
 
 public class Task {
-    String taskName;
-    Boolean isDone;
-    String taskType;
+    private String taskName;
+    private Boolean isDone;
+    private String taskType;
 
     /**
      * Creates a new Task.
@@ -45,6 +45,18 @@ public class Task {
      */
     public String getTaskName() {
         return taskName;
+    }
+
+    public void setTaskName(String taskName) {
+        this.taskName = taskName;
+    }
+
+    public void setIsDone(Boolean isDone) {
+        this.isDone = isDone;
+    }
+
+    public void setTaskType(String taskType) {
+        this.taskType = taskType;
     }
 
     /**

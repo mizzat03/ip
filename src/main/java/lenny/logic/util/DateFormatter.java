@@ -1,4 +1,4 @@
-package lenny.util;
+package lenny.logic.util;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -83,10 +83,10 @@ public class DateFormatter {
     }
 
     /**
-     * Given an integer,produces a ordinal for it.
+     * Given an integer,produces an ordinal for it.
      *
      * @param d An integer
-     * @return A string representation of the ordinal of a integer.
+     * @return A string representation of the ordinal of an integer.
      */
     private static String ordinal(int d) {
         int v = d % 100;

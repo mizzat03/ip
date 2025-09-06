@@ -1,44 +1,67 @@
-package lenny.parser;
+package lenny.logic.parser;
 
-import lenny.exception.LennyExceptions;
-import lenny.task.Deadline;
-import lenny.task.Event;
-import lenny.task.Todo;
+import lenny.logic.command.AddCommand;
+import lenny.logic.command.Command;
+import lenny.logic.command.DeleteCommand;
+import lenny.logic.command.ExitCommand;
+import lenny.logic.command.FindCommand;
+import lenny.logic.command.ListCommand;
+import lenny.logic.command.MarkCommand;
+import lenny.logic.command.UnmarkCommand;
+import lenny.logic.exception.LennyExceptions;
+import lenny.logic.task.Deadline;
+import lenny.logic.task.Event;
+import lenny.logic.task.Todo;
+
 
 
 /**
  * Parses user input commands into Task objects or program actions.
  */
+
 public class Parser {
 
     /**
-     * Parses a command string to determine the type of task the user is inputting.
-     *
-     * @param input Full user input string
-     * @return A string containing the description of the task.
-     * */
-    public static String command(String input) {
-        String[] parts = input.trim().split("\\s+", 2);
-        return parts[0].toLowerCase();
-    }
-    /**
-     * Parses a command string for an integer index for either 'mark', 'unmark' or 'delete' actions.
-     *
-     * @param input Full user input string.
-     * @return An integer index.
-     * @throws LennyExceptions If index is missing or invalid.
+     * Parse the user input and return the response as a String.
      */
-    public static int parseIndex(String input) throws LennyExceptions {
-        String[] parts = input.trim().split("\\s+", 2);
-        if (parts.length < 2) {
-            throw new LennyExceptions("OOPS!!! Provide an index.");
-        }
-        try {
-            return Integer.parseInt(parts[1]);
-        } catch (NumberFormatException e) {
-            throw new LennyExceptions("OOPS!!! Index must be a number.");
+    public static Command parse(String fullCommand) throws LennyExceptions {
+        String[] parts = fullCommand.trim().split(" ", 2);
+        String command = parts[0].toLowerCase();
+
+        switch (command) {
+        case "bye":
+            return new ExitCommand();
+        case "list":
+            return new ListCommand();
+        case "todo":
+            Todo todo = parseTodo(fullCommand);
+            return new AddCommand(todo);
+        case "deadline":
+            Deadline deadline = parseDeadline(fullCommand);
+            return new AddCommand(deadline);
+        case "event":
+            Event event = parseEvent(fullCommand);
+            return new AddCommand(event);
+        case "delete":
+            int i = parseIndex(fullCommand);
+            return new DeleteCommand(i);
+        case "mark":
+            int j = parseIndex(fullCommand);
+            return new MarkCommand(j);
+        case "unmark":
+            int k = parseIndex(fullCommand);
+            return new UnmarkCommand(k);
+        case "find":
+            String s = parseKeyword(fullCommand);
+            return new FindCommand(s);
+        default:
+            throw new LennyExceptions("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
+
+
+    // helper methods
+
     /**
      * Parses a todo command string into a Todo object.
      *
@@ -53,6 +76,7 @@ public class Parser {
         }
         return new Todo(parts[1].trim(), false);
     }
+
     /**
      * Parses a deadline command string into a Deadline object.
      *
@@ -100,6 +124,26 @@ public class Parser {
     }
 
     /**
+     * Parses a command string for an integer index for either 'mark', 'unmark' or 'delete' actions.
+     *
+     * @param input Full user input string.
+     * @return An integer index.
+     * @throws LennyExceptions If index is missing or invalid.
+     */
+    public static int parseIndex(String input) throws LennyExceptions {
+        String[] parts = input.trim().split("\\s+", 2);
+        if (parts.length < 2) {
+            throw new LennyExceptions("OOPS!!! Provide an index.");
+        }
+        try {
+            return Integer.parseInt(parts[1]);
+        } catch (NumberFormatException e) {
+            throw new LennyExceptions("OOPS!!! Index must be a number.");
+        }
+    }
+
+
+    /**
      * Parses a find command for the keyword.
      *
      * @param input Full user input string containing the keyword.
@@ -112,5 +156,10 @@ public class Parser {
             throw new LennyExceptions("OOPS!!! Provide a keyword.");
         }
         return parts[1];
+    }
+
+    /** For CLI exit condition */
+    public static boolean isExit(String fullCommand) {
+        return fullCommand.trim().equalsIgnoreCase("bye");
     }
 }

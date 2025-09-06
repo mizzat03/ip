@@ -1,4 +1,4 @@
-package lenny.ui;
+package lenny.logic.ui;
 
 import java.util.Scanner;
 
@@ -37,10 +37,10 @@ public class Ui {
     }
 
     /**
-     * Displays a loading error message.
+     * Displays a command response
      */
-    public void showLoadingError() {
-        System.out.println("OOPS!!! Problem preparing data storage.");
+    public void showResponse(String response) {
+        System.out.println(response);
     }
 
     /**

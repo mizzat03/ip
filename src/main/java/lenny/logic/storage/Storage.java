@@ -1,12 +1,4 @@
-package lenny.storage;
-
-
-import lenny.task.Deadline;
-import lenny.task.Event;
-import lenny.task.Task;
-import lenny.task.TaskList;
-import lenny.task.Todo;
-
+package lenny.logic.storage;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -18,6 +10,15 @@ import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+
+import lenny.logic.task.Deadline;
+import lenny.logic.task.Event;
+import lenny.logic.task.Task;
+import lenny.logic.task.TaskList;
+import lenny.logic.task.Todo;
+
+
+
 
 /**
  * Handles reading and writing tasks to storage.
