@@ -1,4 +1,4 @@
-package lenny.task;
+package lenny.logic.task;
 
 /**
  * Represents a simple task without a specific deadline or event duration.
@@ -13,13 +13,13 @@ public class Todo extends Task {
      */
     public Todo(String taskName, Boolean isDone) {
         super(taskName);
-        taskType = "T";
-        this.isDone = isDone;
+        this.setTaskType("T");
+        this.setIsDone(isDone);
     }
 
     @Override
     public String toString() {
-        return "[T]" + (this.isDone ? "[X] " : "[ ] ") + this.getTaskName();
+        return "[T]" + (this.getIsDone() ? "[X] " : "[ ] ") + this.getTaskName();
     }
 
 

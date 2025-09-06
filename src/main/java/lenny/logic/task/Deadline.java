@@ -1,6 +1,6 @@
-package lenny.task;
+package lenny.logic.task;
 
-import lenny.util.DateFormatter;
+import lenny.logic.util.DateFormatter;
 
 /**
  * Represents a task with a deadline.
@@ -18,9 +18,9 @@ public class Deadline extends Task {
      */
     public Deadline(String taskName, String rawDeadline, Boolean isDone) {
         super(taskName);
-        this.taskType = "D";
+        this.setTaskType("D");
         this.deadline = DateFormatter.format(rawDeadline);
-        this.isDone = isDone;
+        this.setIsDone(isDone);
     }
 
     /**
@@ -34,7 +34,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + (this.isDone ? "[X] " : "[ ] ") + this.getTaskName() + " (by: " + this.deadline + ")";
+        return "[D]" + (this.getIsDone() ? "[X] " : "[ ] ") + this.getTaskName() + " (by: " + this.deadline + ")";
     }
 }
 

@@ -1,4 +1,4 @@
-package lenny.task;
+package lenny.logic.task;
 
 import java.util.ArrayList;
 
@@ -54,9 +54,6 @@ public class TaskList {
      */
     public void add(Task task) {
         list.add(task);
-        System.out.println("Got it. I've added this task:");
-        System.out.println("  " + task);
-        System.out.println("Now you have " + list.size() + " tasks in the list.");
     }
 
     /**
@@ -65,11 +62,8 @@ public class TaskList {
      * @param oneBasedIndex Index of the task to remove (1-based).
      *
      */
-    public void delete(int oneBasedIndex) {
-        Task removed = list.remove(oneBasedIndex - 1);
-        System.out.println("Noted. I've removed this task:");
-        System.out.println("  " + removed);
-        System.out.println("Now you have " + list.size() + " tasks in the list.");
+    public Task delete(int oneBasedIndex) {
+        return list.remove(oneBasedIndex - 1);
     }
 
     /**
@@ -81,8 +75,6 @@ public class TaskList {
     public void mark(int oneBasedIndex) {
         Task t = list.get(oneBasedIndex - 1);
         t.mark();
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println("  " + t);
     }
 
     /**
@@ -94,31 +86,17 @@ public class TaskList {
     public void unmark(int oneBasedIndex) {
         Task t = list.get(oneBasedIndex - 1);
         t.unmark();
-        System.out.println("OK, I've marked this task as not done yet:");
-        System.out.println("  " + t);
     }
 
     /**
      * Prints the current tasks in the list.
      *
      */
-    public void show() {
-        System.out.println("Here are the tasks in your list:");
+    public String show() {
+        String response = "Here are the tasks in your list:\n";
         for (int i = 0; i < list.size(); i++) {
-            System.out.println((i + 1) + ". " + list.get(i));
+            response += ((i + 1) + ". " + list.get(i) + "\n");
         }
-    }
-
-    /**
-     * Prints the current tasks in the list.
-     * @param keyword The word we are searching for.
-     */
-    public void find(String keyword) {
-        System.out.println("Here are the matching tasks in your list:");
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).taskName.toLowerCase().contains(keyword.toLowerCase())) {
-                System.out.println((i + 1) + ". " + list.get(i));
-            }
-        }
+        return response;
     }
 }

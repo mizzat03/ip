@@ -1,10 +1,10 @@
 package storage;
 
-import lenny.task.Task;
-import lenny.task.Todo;
-import lenny.task.Deadline;
-import lenny.storage.Storage;
-import lenny.task.TaskList;
+import lenny.logic.task.Task;
+import lenny.logic.task.Todo;
+import lenny.logic.task.Deadline;
+import lenny.logic.storage.Storage;
+import lenny.logic.task.TaskList;
 
 import java.nio.file.Files;
 import java.nio.file.Path;

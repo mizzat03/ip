@@ -1,4 +1,4 @@
-package lenny.exception;
+package lenny.logic.exception;
 
 /**
  * Represents an exception specific to the Lenny application.

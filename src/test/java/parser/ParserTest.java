@@ -1,9 +1,10 @@
 package parser;
 
-import lenny.exception.LennyExceptions;
-import lenny.task.Todo;
-import lenny.task.Event;
-import lenny.parser.Parser;
+import lenny.logic.parser.Parser;
+
+import lenny.logic.exception.LennyExceptions;
+import lenny.logic.task.Todo;
+import lenny.logic.task.Event;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -1,6 +1,6 @@
-package lenny.task;
+package lenny.logic.task;
 
-import lenny.util.DateFormatter;
+import lenny.logic.util.DateFormatter;
 
 
 /**
@@ -20,10 +20,10 @@ public class Event extends Task {
      */
     public Event(String taskName, String fromRaw, String toRaw , Boolean isDone) {
         super(taskName);
-        taskType = "E";
+        this.setTaskType("E");
         this.from = DateFormatter.format(fromRaw);
         this.to = DateFormatter.format(toRaw);
-        this.isDone = isDone;
+        this.setIsDone(isDone);
     }
 
     /**
@@ -37,7 +37,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + (isDone ? "[X] " : "[ ] ") + getTaskName() + " (from: " + from + " to: " + to + ")";
+        return "[E]" + (this.getIsDone() ? "[X] " : "[ ] ") + getTaskName() + " (from: " + from + " to: " + to + ")";
     }
 
 }

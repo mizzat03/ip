@@ -1,7 +1,7 @@
 package task;  //same package as the class being tested
 
 
-import lenny.task.Todo;
+import lenny.logic.task.Todo;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
