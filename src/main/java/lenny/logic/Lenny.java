@@ -51,8 +51,15 @@ public class Lenny {
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
+                assert fullCommand != null : "User input must not be null";
+
+
                 Command c = Parser.parse(fullCommand);
+                assert c != null : "Parser must return a valid command";
+
                 String response = c.execute(tasks, storage, ui);
+                assert response != null : "Command execution must return a response";
+
                 ui.showResponse(response);
                 isExit = c.isExit();
             } catch (LennyExceptions e) {
@@ -74,6 +81,8 @@ public class Lenny {
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
+            assert c != null : "Parser must return a valid command";
+
             return c.execute(tasks, storage, ui);
         } catch (LennyExceptions e) {
             return e.getMessage();
