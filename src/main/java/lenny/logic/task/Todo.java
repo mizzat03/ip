@@ -13,8 +13,11 @@ public class Todo extends Task {
      */
     public Todo(String taskName, Boolean isDone) {
         super(taskName);
-        this.setTaskType("T");
         this.setIsDone(isDone);
+    }
+
+    public String getTaskType() {
+        return "T";
     }
 
     @Override
