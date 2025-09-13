@@ -5,13 +5,16 @@ import java.util.Objects;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.OverrunStyle;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 
 
 /**
@@ -45,7 +48,15 @@ public class DialogBox extends HBox {
             fxml.setController(this);
             fxml.load();
 
+            this.setAlignment(Pos.TOP_RIGHT);
+            this.setPadding(new Insets(6, 14, 6, 14));
+
             dialog.setText(text);
+            dialog.setWrapText(true);
+            dialog.setTextOverrun(OverrunStyle.CLIP);
+            dialog.setMaxWidth(420);
+            dialog.setMinWidth(Region.USE_PREF_SIZE);
+            HBox.setHgrow(dialog, Priority.NEVER);
             if (img != null) {
                 displayPicture.setImage(img);
             }

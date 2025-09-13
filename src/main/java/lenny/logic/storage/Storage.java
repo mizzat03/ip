@@ -85,23 +85,28 @@ public class Storage {
                     continue;
                 }
                 String desc = parts[2];
-
-
+                int priority = Integer.parseInt(parts[parts.length - 1]);
                 switch (type) {
                 case "T":
-                    tasks.add(new Todo(desc, done));
+                    Todo todo = new Todo(desc, done);
+                    todo.setPriority(priority);
+                    tasks.add(todo);
                     break;
                 case "D":
                     if (parts.length >= 4) {
                         String by = parts[3];
-                        tasks.add(new Deadline(desc, by, done));
+                        Deadline deadline = new Deadline(desc, by, done);
+                        deadline.setPriority(priority);
+                        tasks.add(deadline);
                     }
                     break;
                 case "E":
                     if (parts.length >= 5) {
                         String from = parts[3];
                         String to = parts[4];
-                        tasks.add(new Event(desc, from, to, done));
+                        Event event = new Event(desc, from, to, done);
+                        event.setPriority(priority);
+                        tasks.add(event);
                     }
                     break;
                 default:
@@ -141,16 +146,17 @@ public class Storage {
         String type = t.getTaskType();
         String done = t.getIsDone() ? "1" : "0";
         String desc = t.getTaskName();
+        String priority = Integer.toString(t.getPriority());
 
         switch (type) {
         case "T":
-            return String.format("%s | %s | %s", type, done, desc);
+            return String.format("%s | %s | %s | %s", type, done, desc, priority);
         case "D":
             String by = ((Deadline) t).getDeadline();
-            return String.format("%s | %s | %s | %s", type, done, desc, by);
+            return String.format("%s | %s | %s | %s | %s", type, done, desc, by, priority);
         case "E":
             String duration = ((Event) t).getDuration();
-            return String.format("%s | %s | %s | %s", type, done, desc, duration);
+            return String.format("%s | %s | %s | %s | %s", type, done, desc, duration, priority);
         default:
             return "# Unknown task: " + type;
         }

@@ -1,6 +1,7 @@
 package lenny.logic;
 
 import lenny.logic.command.Command;
+import lenny.logic.command.SupportsPriority;
 import lenny.logic.exception.LennyExceptions;
 import lenny.logic.parser.Parser;
 import lenny.logic.storage.Storage;
@@ -19,6 +20,8 @@ public class Lenny {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private final boolean guiMode;
+
 
     /**
      * Creates a new instance of Lenny, initializing storage, task list, and UI.
@@ -35,6 +38,26 @@ public class Lenny {
             ui.showError(e.getMessage());
             tasks = new TaskList();
         }
+        guiMode = true;
+    }
+
+    /**
+     * Creates a new instance of Lenny, initializing storage, task list, and UI in GUI mode.
+     *
+     * @param filePath The file path used by {@link Storage} to load and save tasks.
+     * @param guiMode A boolean to indicate guiMode or not.
+     */
+    public Lenny(String filePath, boolean guiMode) {
+        storage = new Storage(filePath);
+        ui = new Ui();
+        try {
+            storage.ensureFile();
+            tasks = new TaskList(storage.load());
+        } catch (RuntimeException e) {
+            ui.showError(e.getMessage());
+            tasks = new TaskList();
+        }
+        this.guiMode = guiMode;
     }
 
     /**
@@ -55,6 +78,10 @@ public class Lenny {
 
 
                 Command c = Parser.parse(fullCommand);
+                if (c instanceof SupportsPriority) {
+                    int priority = ui.readPriority();
+                    ((SupportsPriority) c).setPriority(priority);
+                }
                 assert c != null : "Parser must return a valid command";
 
                 String response = c.execute(tasks, storage, ui);
@@ -81,6 +108,31 @@ public class Lenny {
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
+            if (c instanceof SupportsPriority) {
+                int priority = ui.readPriority();
+                ((SupportsPriority) c).setPriority(priority);
+            }
+            return c.execute(tasks, storage, ui);
+        } catch (LennyExceptions e) {
+            return e.getMessage();
+        }
+    }
+
+    /**
+     * Runs the program in Graphical User Interface (GUI) mode.
+     * <p>
+     * Accepts a single user input and a priority, parses it into a {@link Command}, executes it,
+     * and returns the response as a string. This method is called repeatedly by
+     * the GUI controller to handle user interactions.
+     *
+     * @param input The raw user input string.
+     * @param priority The integer representing priority for a given task.
+     * @return The program's response as a string.
+     */
+    public String getResponse(String input, int priority) {
+        try {
+            Command c = Parser.parse(input);
+            ((SupportsPriority) c).setPriority(priority);
             assert c != null : "Parser must return a valid command";
 
             return c.execute(tasks, storage, ui);

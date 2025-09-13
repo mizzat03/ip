@@ -34,7 +34,7 @@ public class Gui extends Application {
         Parent root = loader.load();
 
         MainWindow controller = loader.getController();
-        controller.setLenny(new Lenny("data/LennyData.txt"));
+        controller.setLenny(new Lenny("data/LennyData.txt"), true);
 
         stage.setTitle("Lenny");
         stage.setScene(new Scene(root));

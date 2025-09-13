@@ -8,6 +8,8 @@ package lenny.logic.task;
 public class Task {
     private String taskName;
     private Boolean isDone;
+    private String taskType;
+    private int priority;
 
     /**
      * Creates a new Task.
@@ -39,14 +41,25 @@ public class Task {
         return taskName;
     }
 
+    public int getPriority() {
+        return priority;
+    }
+
     public void setTaskName(String taskName) {
         this.taskName = taskName;
+    }
+
+    public void setPriority(int priority) {
+        this.priority = priority;
     }
 
     public void setIsDone(Boolean isDone) {
         this.isDone = isDone;
     }
 
+    public void setTaskType(String taskType) {
+        this.taskType = taskType;
+    }
 
     /**
      * Marks this task as done.

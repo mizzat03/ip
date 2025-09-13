@@ -25,7 +25,6 @@ public abstract class Command {
      * @return A string response to be shown to the user.
      */
     public abstract String execute(TaskList tasks, Storage storage, Ui ui);
-
     /**
      * Indicates whether this command will terminate the program.
      * <p>

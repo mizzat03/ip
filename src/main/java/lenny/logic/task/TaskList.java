@@ -96,7 +96,22 @@ public class TaskList {
         String response = "Here are the tasks in your list:\n";
         for (int i = 0; i < list.size(); i++) {
             response += ((i + 1) + ". " + list.get(i) + "\n");
+            response += ("This task has priority level: " + list.get(i).getPriority() + "\n");
         }
         return response;
+    }
+
+    /**
+     * Prints the current tasks in the list that matches the priority.
+     *
+     */
+    public String showPriority(int priority) {
+        StringBuilder response = new StringBuilder("Here are the matching tasks in your list with priority " + priority + ":\n");
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getPriority() == priority) {
+                response.append((i + 1)).append(". ").append(list.get(i)).append("\n");
+            }
+        }
+        return response.toString();
     }
 }

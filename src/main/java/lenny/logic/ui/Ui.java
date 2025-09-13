@@ -28,6 +28,29 @@ public class Ui {
     }
 
     /**
+     * Reads the priority level of the task from the user.
+     *
+     * @return The priority level as an integer.
+     */
+    public int readPriority() {
+        while (true) {
+            System.out.print("Enter task priority (1–5): ");
+            if (!in.hasNextLine()) {
+                throw new IllegalStateException("No input available for priority.");
+            }
+            String s = in.nextLine().trim();
+            try {
+                int p = Integer.parseInt(s);
+                if (p >= 1 && p <= 5) {
+                    return p;
+                }
+            } catch (NumberFormatException ignored) { }
+
+            System.out.println("Invalid priority. Please enter a number from 1 to 5.");
+        }
+    }
+
+    /**
      * Displays an error message.
      *
      * @param message Error details to show.
