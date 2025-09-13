@@ -1,1 +1,1 @@
-T | 1 | buy book
+T | 0 | go home

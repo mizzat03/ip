@@ -20,10 +20,13 @@ public class Event extends Task {
      */
     public Event(String taskName, String fromRaw, String toRaw , Boolean isDone) {
         super(taskName);
-        this.setTaskType("E");
         this.from = DateFormatter.format(fromRaw);
         this.to = DateFormatter.format(toRaw);
         this.setIsDone(isDone);
+    }
+
+    public String getTaskType() {
+        return "E";
     }
 
     /**

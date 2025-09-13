@@ -18,11 +18,13 @@ public class Deadline extends Task {
      */
     public Deadline(String taskName, String rawDeadline, Boolean isDone) {
         super(taskName);
-        this.setTaskType("D");
         this.deadline = DateFormatter.format(rawDeadline);
         this.setIsDone(isDone);
     }
 
+    public String getTaskType() {
+        return "D";
+    }
     /**
      * Returns the deadline string.
      *

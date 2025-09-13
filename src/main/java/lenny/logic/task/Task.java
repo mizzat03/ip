@@ -8,7 +8,6 @@ package lenny.logic.task;
 public class Task {
     private String taskName;
     private Boolean isDone;
-    private String taskType;
 
     /**
      * Creates a new Task.
@@ -19,16 +18,9 @@ public class Task {
         this.taskName = taskName;
         isDone = false;
     }
-
-    /**
-     * Returns the type of the task as a string symbol.
-     *
-     * @return "T", "D", or "E" if the task type is Todo,Deadline or Event respectively.
-     */
     public String getTaskType() {
-        return taskType;
+        return "T";
     }
-
     /**
      * Returns whether this task is completed.
      *
@@ -55,9 +47,6 @@ public class Task {
         this.isDone = isDone;
     }
 
-    public void setTaskType(String taskType) {
-        this.taskType = taskType;
-    }
 
     /**
      * Marks this task as done.
