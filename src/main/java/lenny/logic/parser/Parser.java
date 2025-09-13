@@ -7,6 +7,7 @@ import lenny.logic.command.ExitCommand;
 import lenny.logic.command.FindCommand;
 import lenny.logic.command.ListCommand;
 import lenny.logic.command.MarkCommand;
+import lenny.logic.command.PriorityCommand;
 import lenny.logic.command.UnmarkCommand;
 import lenny.logic.exception.LennyExceptions;
 import lenny.logic.task.Deadline;
@@ -54,6 +55,9 @@ public class Parser {
         case "find":
             String s = parseKeyword(fullCommand);
             return new FindCommand(s);
+        case "priority":
+            int p = parseIndex(fullCommand);
+            return new PriorityCommand(p);
         default:
             throw new LennyExceptions("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

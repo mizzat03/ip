@@ -1,14 +1,19 @@
 package lenny.gui;
 
 import java.util.Objects;
+import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import lenny.logic.Lenny;
+
 
 /**
  * Controller for {@code MainWindow.fxml}.
@@ -41,6 +46,8 @@ public class MainWindow {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        scrollPane.setFitToWidth(true);
+        dialogContainer.setFillWidth(true);
         dialogContainer.getChildren().add(
                 DialogBox.getLennyDialog("Hello! I'm Lenny. What can I do for you?", lennyImage)
         );
@@ -52,9 +59,11 @@ public class MainWindow {
      * @param l the {@link lenny.logic.Lenny} instance to use
      */
 
-    public void setLenny(Lenny l) {
+    public void setLenny(Lenny l, boolean GuiMode) {
         this.lenny = l;
     }
+
+
 
     /**
      * Handles the Send button (and Enter key) action: reads the text field,
@@ -63,18 +72,64 @@ public class MainWindow {
      */
     @FXML
     private void handleUserInput() {
+        Integer p = null;
+        String response = "";
         String input = userInput.getText();
         if (input == null || input.isBlank()) {
             return;
         }
 
-        String response = lenny.getResponse(input);
+        // If it's an add-type command and user didn’t include /p, ask for it like the CLI.
+        if (needsPriorityPrompt(input) && extractInlinePriority(input) == null) {
+            p = promptPriorityDialog();
+            if (p == null) {
+                // User cancelled: do nothing (no command sent, no message added)
+                return;
+            }
+        }
+
+        if (p == null) {
+            response = lenny.getResponse(input);
+        } else {
+            response = lenny.getResponse(input, p);
+        }
 
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getLennyDialog(response, lennyImage)
         );
-
         userInput.clear();
+    }
+    /** Returns true if this command typically needs a priority. */
+    private boolean needsPriorityPrompt(String cmd) {
+        if (cmd == null) {
+            return false;
+        }
+        String s = cmd.strip().toLowerCase();
+        // Add/adjust prefixes based on your actual add commands
+        return s.startsWith("todo ") || s.startsWith("deadline ") || s.startsWith("event ");
+    }
+
+    /** Returns the inline /p N priority if present and valid (1–5); otherwise null. */
+    private Integer extractInlinePriority(String cmd) {
+        if (cmd == null) {
+            return null;
+        }
+        Matcher m = Pattern.compile("(?i)(?:^|\\s)\\/(?:p|priority)\\s+(\\d)").matcher(cmd);
+        if (!m.find()) {
+            return null;
+        }
+        int p = Integer.parseInt(m.group(1));
+        return (p >= 1 && p <= 5) ? p : null;
+    }
+
+    /** Shows a GUI dialog that asks exactly “What is the priority of the task? (1–5)”. */
+    private Integer promptPriorityDialog() {
+        ChoiceDialog<Integer> dialog = new ChoiceDialog<>(3, 1, 2, 3, 4, 5);
+        dialog.setTitle("Set Priority");
+        dialog.setHeaderText("What is the priority of the task? (1–5)");
+        dialog.setContentText("Priority:");
+        Optional<Integer> res = dialog.showAndWait();
+        return res.orElse(null); // null if user cancelled
     }
 }

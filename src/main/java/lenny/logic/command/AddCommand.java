@@ -10,8 +10,9 @@ import lenny.logic.ui.Ui;
  * When executed, this command appends the given task, updates
  * the persistent storage, and returns a confirmation message.
  */
-public class AddCommand extends Command {
+public class AddCommand extends Command implements SupportsPriority {
     private final Task task;
+    private int priority;
 
     /**
      * Creates an {@code AddCommand} with the specified task.
@@ -21,6 +22,12 @@ public class AddCommand extends Command {
     public AddCommand(Task task) {
         this.task = task;
     }
+
+    public void setPriority(int priority) {
+        this.priority = priority;
+    }
+
+
 
     /**
      * Executes the add command by appending the task to the task list,
@@ -35,6 +42,7 @@ public class AddCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage, Ui ui) {
+        task.setPriority(priority);
         tasks.add(task);
         storage.save(tasks);
         return "Got it. I've added this task:\n" + task + "\n" + "Now you have " + tasks.size() + " tasks in the list.";
