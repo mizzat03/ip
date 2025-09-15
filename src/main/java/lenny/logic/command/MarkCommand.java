@@ -33,6 +33,7 @@ public class MarkCommand extends Command {
     public String execute(TaskList tasks, Storage storage, Ui ui) {
         tasks.mark(index);
         storage.save(tasks);
-        return "Nice! I've marked this task as done:\n" + " " + tasks.get(index);
+        //Used AI to generate personality
+        return "✅ Marked as done:\n" + " " + tasks.get(index);
     }
 }

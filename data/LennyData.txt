@@ -1,4 +1,5 @@
-T | 1 | oo | 3
-T | 0 | pop | 3
-D | 0 | homework | sunday | 3
-T | 0 | go home
+T | 0 | go home | 3
+T | 0 | go school | 3
+T | 0 | homework | 3
+T | 0 | rob a bank | 3
+T | 0 | rob a bank | 3

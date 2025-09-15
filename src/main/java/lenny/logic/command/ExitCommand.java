@@ -24,7 +24,8 @@ public class ExitCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage, Ui ui) {
-        return "Goodbye! See you soon.";
+        //Used AI to generate personality
+        return "Powering down... see you soon \uD83D\uDC4B.";
     }
 
     /**

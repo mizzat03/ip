@@ -37,10 +37,11 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage, Ui ui) {
-        StringBuilder response = new StringBuilder("Here are the matching tasks in your list:\n");
-        for (int i = 0; i < tasks.size(); i++) {
+        StringBuilder response = new StringBuilder("\uD83D\uDD0D Detective mode activated... here’s what I dug up:\n");
+        for (int i = 1; i <= tasks.size(); i++) {
             if (tasks.get(i).getTaskName().toLowerCase().contains(keyword.toLowerCase())) {
                 response.append((i + 1)).append(". ").append(tasks.get(i)).append("\n");
+                response.append("This task has priority level: ").append(tasks.get(i).getPriority()).append("\n");
             }
         }
         return response.toString();

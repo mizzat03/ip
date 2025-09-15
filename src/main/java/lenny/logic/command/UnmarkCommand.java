@@ -33,6 +33,7 @@ public class UnmarkCommand extends Command {
     public String execute(TaskList tasks, Storage storage, Ui ui) {
         tasks.unmark(index);
         storage.save(tasks);
-        return "OK, I've marked this task as not done yet:\n" + " " + tasks.get(index);
+        //Used AI to generate personality
+        return "Back to the to-do pile it goes:\n" + " " + tasks.get(index);
     }
 }
