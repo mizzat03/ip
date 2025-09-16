@@ -45,6 +45,7 @@ public class AddCommand extends Command implements SupportsPriority {
         task.setPriority(priority);
         tasks.add(task);
         storage.save(tasks);
-        return "Got it. I've added this task:\n" + task + "\n" + "Now you have " + tasks.size() + " tasks in the list.";
+        // Usage of AI to add personality
+        return "Boom! Just added to your list:\n" + task + "\n" + "This task has priority level: " + task.getPriority() + "\n" + "Now you have " + tasks.size() + " tasks in the list.";
     }
 }

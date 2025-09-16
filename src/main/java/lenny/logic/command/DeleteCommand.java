@@ -38,6 +38,7 @@ public class DeleteCommand extends Command {
     public String execute(TaskList tasks, Storage storage, Ui ui) {
         Task removed = tasks.delete(index);
         storage.save(tasks);
-        return "Noted. I've removed this task:\n" + " " + removed + "\nNow you have " + tasks.size() + " tasks in the list.";
+        //Used AI to generate personality
+        return "Task erased from existence:\n" + " " + removed + "\nNow you have " + tasks.size() + " tasks in the list.";
     }
 }
