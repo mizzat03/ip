@@ -143,11 +143,16 @@ public class Parser {
         if (parts.length < 2) {
             throw new LennyExceptions("OOPS!!! Provide an index.");
         }
+        int index;
         try {
-            return Integer.parseInt(parts[1]);
+            index = Integer.parseInt(parts[1]);
         } catch (NumberFormatException e) {
             throw new LennyExceptions("OOPS!!! Index must be a number.");
         }
+        if (index <= 0) {
+            throw new LennyExceptions("OOPS!!! Index must be greater than zero.");
+        }
+        return index;
     }
 
 

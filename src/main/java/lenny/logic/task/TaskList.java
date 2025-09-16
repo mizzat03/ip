@@ -44,6 +44,9 @@ public class TaskList {
      * @return The task at the specified index.
      */
     public Task get(int oneBasedIndex) {
+        if (oneBasedIndex < 1 || oneBasedIndex > list.size()) {
+            throw new IndexOutOfBoundsException("Index " + oneBasedIndex + " out of range (1-" + list.size() + ")");
+        }
         return list.get(oneBasedIndex - 1);
     }
 
@@ -63,6 +66,9 @@ public class TaskList {
      *
      */
     public Task delete(int oneBasedIndex) {
+        if (oneBasedIndex < 1 || oneBasedIndex > list.size()) {
+            throw new IndexOutOfBoundsException("Index " + oneBasedIndex + " out of range (1-" + list.size() + ")");
+        }
         return list.remove(oneBasedIndex - 1);
     }
 
@@ -73,6 +79,9 @@ public class TaskList {
      *
      */
     public void mark(int oneBasedIndex) {
+        if (oneBasedIndex < 1 || oneBasedIndex > list.size()) {
+            throw new IndexOutOfBoundsException("Index " + oneBasedIndex + " out of range (1-" + list.size() + ")");
+        }
         Task t = list.get(oneBasedIndex - 1);
         t.mark();
     }
@@ -84,6 +93,9 @@ public class TaskList {
      *
      */
     public void unmark(int oneBasedIndex) {
+        if (oneBasedIndex < 1 || oneBasedIndex > list.size()) {
+            throw new IndexOutOfBoundsException("Index " + oneBasedIndex + " out of range (1-" + list.size() + ")");
+        }
         Task t = list.get(oneBasedIndex - 1);
         t.unmark();
     }
