@@ -26,7 +26,11 @@ public class Parser {
      * Parse the user input and return the response as a String.
      */
     public static Command parse(String fullCommand) throws LennyExceptions {
-        String[] parts = fullCommand.trim().split(" ", 2);
+        String cleaned = fullCommand.trim().replaceAll("\\s+", " "); // collapse multiple spaces
+        if (cleaned.isEmpty()) {
+            throw new LennyExceptions("OOPS!!! Command cannot be empty.");
+        }
+        String[] parts = cleaned.split(" ", 2);
         String command = parts[0].toLowerCase();
 
         switch (command) {
