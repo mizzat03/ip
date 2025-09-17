@@ -40,7 +40,7 @@ public class FindCommand extends Command {
         StringBuilder response = new StringBuilder("\uD83D\uDD0D Detective mode activated... here’s what I dug up:\n");
         for (int i = 1; i <= tasks.size(); i++) {
             if (tasks.get(i).getTaskName().toLowerCase().contains(keyword.toLowerCase())) {
-                response.append((i + 1)).append(". ").append(tasks.get(i)).append("\n");
+                response.append((i)).append(". ").append(tasks.get(i)).append("\n");
                 response.append("This task has priority level: ").append(tasks.get(i).getPriority()).append("\n");
             }
         }

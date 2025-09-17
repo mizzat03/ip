@@ -1,4 +1,3 @@
+T | 1 | CS2100 Tutorial | 1
+D | 0 | project | 8pm | 3
 T | 0 | go home | 3
-T | 0 | go school | 3
-T | 0 | homework | 3
-T | 0 | rob a bank | 3

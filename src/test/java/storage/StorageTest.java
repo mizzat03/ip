@@ -1,18 +1,23 @@
 package storage;
 
-import lenny.logic.task.Task;
-import lenny.logic.task.Todo;
-import lenny.logic.task.Deadline;
-import lenny.logic.storage.Storage;
-import lenny.logic.task.TaskList;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import lenny.logic.storage.Storage;
+import lenny.logic.task.Deadline;
+import lenny.logic.task.Task;
+import lenny.logic.task.TaskList;
+import lenny.logic.task.Todo;
+
+
+
+
 
 class StorageTest {
 
