@@ -33,7 +33,7 @@ public class MainWindow {
     private Lenny lenny;
 
     // preload avatars from resources
-    private final Image userImage  =
+    private final Image userImage =
             new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/DaUser.png")));
     private final Image lennyImage =
             new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/DaLenny.png")));
@@ -45,9 +45,11 @@ public class MainWindow {
      */
     @FXML
     public void initialize() {
-        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         scrollPane.setFitToWidth(true);
         dialogContainer.setFillWidth(true);
+        dialogContainer.heightProperty().addListener((obs, ov, nv) ->
+                javafx.application.Platform.runLater(() -> scrollPane.setVvalue(1.0))
+        );
         dialogContainer.getChildren().add(
                 DialogBox.getLennyDialog("Hello! I'm Lenny. What can I do for you?", lennyImage)
         );

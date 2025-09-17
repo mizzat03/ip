@@ -42,7 +42,7 @@ Got it. I've added this task:
 ```
 ## 🔝 Prioritizing Tasks
 
-Assign a priority level (e.g., 1–5) to a task. In GUI, this is a window that pops after adding a task. In CLI, this comes in after an accepted description of a task.
+Assign a priority level (e.g., 1–5) to a task. In GUI, this is a window that pops after adding a task. In the CLI, you’ll be prompted to assign a priority once the task description has been accepted.
 
 Example: `priority <task number> <level>`
 

@@ -13,7 +13,6 @@ import javafx.scene.control.OverrunStyle;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 
 
@@ -49,14 +48,35 @@ public class DialogBox extends HBox {
             fxml.load();
 
             this.setAlignment(Pos.TOP_RIGHT);
-            this.setPadding(new Insets(6, 14, 6, 14));
+
+            final double h_gap = 4;
+            this.setSpacing(h_gap);
+            this.setPadding(new Insets(6, 8, 6, 8));
+
+            displayPicture.setFitWidth(44);
+            displayPicture.setFitHeight(44);
+            displayPicture.setPreserveRatio(true);
+
+            HBox.setMargin(displayPicture, Insets.EMPTY);
+            HBox.setMargin(dialog, Insets.EMPTY);
 
             dialog.setText(text);
+
             dialog.setWrapText(true);
             dialog.setTextOverrun(OverrunStyle.CLIP);
-            dialog.setMaxWidth(420);
-            dialog.setMinWidth(Region.USE_PREF_SIZE);
-            HBox.setHgrow(dialog, Priority.NEVER);
+            dialog.setMinWidth(0);
+            double padLR = getPadding().getLeft() + getPadding().getRight();
+            dialog.maxWidthProperty().bind(
+                    widthProperty()
+                            .subtract(displayPicture.fitWidthProperty())
+                            .subtract(h_gap)
+                            .subtract(padLR)
+            );
+            dialog.setPrefHeight(Region.USE_COMPUTED_SIZE);
+            dialog.setMinHeight(Region.USE_PREF_SIZE);
+            this.widthProperty().addListener((obs, oldW, newW) -> {
+                dialog.setPrefHeight(Region.USE_COMPUTED_SIZE);
+            });
             if (img != null) {
                 displayPicture.setImage(img);
             }
