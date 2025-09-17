@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceDialog;
@@ -12,6 +13,8 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 import lenny.logic.Lenny;
 
 
@@ -100,6 +103,13 @@ public class MainWindow {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getLennyDialog(response, lennyImage)
         );
+        if (response == "Powering down... see you soon \uD83D\uDC4B.") {
+            Stage stage = (Stage) userInput.getScene().getWindow();
+
+            PauseTransition delay = new PauseTransition(Duration.seconds(2)); // 2-second delay
+            delay.setOnFinished(event -> stage.close());
+            delay.play();
+        }
         userInput.clear();
     }
     /** Returns true if this command typically needs a priority. */
