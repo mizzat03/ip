@@ -103,7 +103,7 @@ public class MainWindow {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getLennyDialog(response, lennyImage)
         );
-        if (response == "Powering down... see you soon \uD83D\uDC4B.") {
+        if (response.equals("Powering down... see you soon \uD83D\uDC4B.")) {
             Stage stage = (Stage) userInput.getScene().getWindow();
 
             PauseTransition delay = new PauseTransition(Duration.seconds(2)); // 2-second delay
@@ -135,11 +135,11 @@ public class MainWindow {
         return (p >= 1 && p <= 5) ? p : null;
     }
 
-    /** Shows a GUI dialog that asks exactly “What is the priority of the task? (1–5)”. */
+    /** Shows a GUI dialog that asks for priority. */
     private Integer promptPriorityDialog() {
         ChoiceDialog<Integer> dialog = new ChoiceDialog<>(3, 1, 2, 3, 4, 5);
         dialog.setTitle("Set Priority");
-        dialog.setHeaderText("What is the priority of the task? (1–5)");
+        dialog.setHeaderText("What is the priority of the task?(1-5)");
         dialog.setContentText("Priority:");
         Optional<Integer> res = dialog.showAndWait();
         return res.orElse(null); // null if user cancelled
